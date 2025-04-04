@@ -44,36 +44,38 @@ export default function ColorForm({ initialColors, onSubmit }) {
       <form onSubmit={handleSubmit} className="color-form">
         {" "}
         {/*presiono Add o Update y se ejecuta handleSubmit*/}
-        <ColorInput
-          label="Hex"
-          type="text"
-          value={hex}
-          onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
-        />
-        <ColorInput
-          label="Hex"
-          type="color"
-          value={hex}
-          onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
-        />
+        <label>
+          Hex
+          <ColorInput
+            type="text"
+            value={hex}
+            onChange={(e) => setHex(e.target.value)}
+          />
+          <ColorInput
+            type="color"
+            value={hex}
+            onChange={(e) => setHex(e.target.value)}
+          />
+        </label>
         <ColorInput
           label="Role"
           type="text"
           value={role}
           onChange={(e) => setRole(e.target.value)}
         />
-        <ColorInput
-          label="Contrast"
-          type="text"
-          value={contrastText}
-          onChange={(e) => setContrastText(e.target.value)}
-        />
-        <ColorInput
-          label="Contrast"
-          type="color"
-          value={contrastText}
-          onChange={(e) => setContrastText(e.target.value)}
-        />
+        <label>
+          Contrast
+          <ColorInput
+            type="text"
+            value={contrastText}
+            onChange={(e) => setContrastText(e.target.value)}
+          />
+          <ColorInput
+            type="color"
+            value={contrastText}
+            onChange={(e) => setContrastText(e.target.value)}
+          />
+        </label>
         <button type="submit">
           {initialColors ? "Update Color" : "Add Color"}{" "}
           {/*cambio los valores y lo guardo con el botón "Update Color" o "Add Color".*/}
