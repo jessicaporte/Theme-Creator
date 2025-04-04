@@ -2,6 +2,7 @@ import useLocalStorageState from "use-local-storage-state";
 import { initialColors } from "./components/colors";
 import ColorForm from "./components/ColorForm";
 import Color from "./components/Color";
+import CopyToClipboard from "./components/CopyToClipboard";
 
 export default function App() {
   const [colors, setColors] = useLocalStorageState("colors", {
@@ -36,14 +37,16 @@ export default function App() {
         <p>There are no colors in the theme. Add some to get started.</p>
       ) : (
         colors.map((color) => (
-          <Color
-            key={color.id}
-            color={color}
-            deleteButton={deleteButton}
-            updateButton={updateButton}
-          />
-          //ahora deletebotton y updatebutton son prop para luego
-          // enviarla a componentes: color.jsx y ellos la reciban
+          <div key={color.id} className="color-card">
+            <Color
+              key={color.id}
+              color={color}
+              deleteButton={deleteButton}
+              updateButton={updateButton}
+            />
+            {/*ahora deletebotton y updatebutton son prop para luego
+          // enviarla a componentes: color.jsx y ellos la reciban*/}
+          </div>
         ))
       )}
     </div>

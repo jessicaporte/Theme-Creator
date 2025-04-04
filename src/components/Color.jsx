@@ -2,6 +2,7 @@ import { useState } from "react";
 import "./Color.css";
 import ColorForm from "./ColorForm";
 import useLocalStorageState from "use-local-storage-state";
+import CopyToClipboard from "./CopyToClipboard";
 
 //3 con showconfirmation , cree boton delete y el confirmacion si o no para borrar
 //4 isEditing para editar color, cree un condicional sobre colorForm, si es true
@@ -44,16 +45,14 @@ export default function Color({ color, deleteButton, updateButton }) {
           <h3 className="color-card-headline">{color.hex}</h3>
           <h4>{color.role}</h4>
           <p>contrast: {color.contrastText}</p>
-
+          <CopyToClipboard text={color.hex} /> {/*del punto 6*/}
           {/*boton edit*/}
           <button onClick={() => setIsEditing(true)}> Edit </button>
           {/* Botón para eliminar,si usuario hace clic en "Delete",se activa  el 
       estado con setShowConfirmation(true), y luego asi aparece el cuadro de confirmación. */}
-
           <button type="button" onClick={() => setShowConfirmation(true)}>
             Delete
           </button>
-
           {/* Mostrar confirmación si showConfirmation es true */}
           {showConfirmation && (
             <div className="color-card-highlight">
