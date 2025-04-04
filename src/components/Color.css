@@ -5,7 +5,7 @@
 
 .color-card-highlight {
   display: inline;
-  padding: 2px 6px;
+  padding: 1px 6px;
   background: black;
   color: white;
 }
@@ -25,4 +25,14 @@ h1 {
   color: #333;
   margin-bottom: 20px;
   gap: 10px;
+  border-radius: 10px;
+}
+
+.fieldset-form {
+  border: 2px solid #ccc;
+  padding: 20px;
+  margin: 20px auto; /* Centrar el fieldset y darle un margen */
+  border-radius: 8px; /* Esquinas redondeadas */
+  max-width: 400px; /* Limitar el ancho máximo del formulario */
+  width: 100%;
 }

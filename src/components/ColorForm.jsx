@@ -2,6 +2,7 @@ import { useState } from "react";
 import { nanoid } from "nanoid";
 import ColorInput from "./ColorInput";
 import { useEffect } from "react";
+import "./Color.css";
 
 export default function ColorForm({ initialColors, onSubmit }) {
   const [hex, setHex] = useState("#000000");
@@ -39,35 +40,37 @@ export default function ColorForm({ initialColors, onSubmit }) {
 
   return (
     // define cómo se ve y cómo funciona el formulario
-    <form onSubmit={handleSubmit} className="color-form">
-      {" "}
-      {/*presiono Add o Update y se ejecuta handleSubmit*/}
-      <ColorInput
-        label="Hex"
-        type="text"
-        value={hex}
-        onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
-      />
-      <ColorInput
-        label="Role"
-        type="text"
-        value={role}
-        onChange={(e) => setRole(e.target.value)}
-      />
-      <ColorInput
-        label="Contrast"
-        type="text"
-        value={contrastText}
-        onChange={(e) => setContrastText(e.target.value)}
-      />
-      <button type="submit">
-        {initialColors ? "Update Color" : "Add Color"}{" "}
-        {/*cambio los valores y lo guardo con el botón "Update Color" o "Add Color".*/}
-      </button>
-      {/*<button type="button" onClick={handleCancel}> 
+    <fieldset className="fieldset-form">
+      <form onSubmit={handleSubmit} className="color-form">
+        {" "}
+        {/*presiono Add o Update y se ejecuta handleSubmit*/}
+        <ColorInput
+          label="Hex"
+          type="text"
+          value={hex}
+          onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
+        />
+        <ColorInput
+          label="Role"
+          type="text"
+          value={role}
+          onChange={(e) => setRole(e.target.value)}
+        />
+        <ColorInput
+          label="Contrast"
+          type="text"
+          value={contrastText}
+          onChange={(e) => setContrastText(e.target.value)}
+        />
+        <button type="submit">
+          {initialColors ? "Update Color" : "Add Color"}{" "}
+          {/*cambio los valores y lo guardo con el botón "Update Color" o "Add Color".*/}
+        </button>
+        {/*<button type="button" onClick={handleCancel}> 
         Cancel
       </button> */}
-    </form>
+      </form>
+    </fieldset>
   );
 }
 
