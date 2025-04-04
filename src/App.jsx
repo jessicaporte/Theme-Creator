@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { initialColors } from "./lib/colors";
+import useLocalStorageState from "use-local-storage-state";
+import { initialColors } from "./components/colors";
 import ColorForm from "./components/ColorForm";
 import Color from "./components/Color";
 
 export default function App() {
-  const [colors, setColors] = useState(initialColors);
+  const [colors, setColors] = useLocalStorageState("colors", {
+    defaultValue: initialColors,
+  });
 
   const addColor = (newColor) => {
     setColors([newColor, ...colors]);
@@ -13,7 +15,7 @@ export default function App() {
   // Función de eliminación
   const deleteButton = (id) => {
     console.log("Eliminando color con id:", id);
-    // Filtrar el array para eliminar el color con el `id` correspondiente
+    // Filtro el array para eliminar el color con el `id` correspondiente
     setColors(colors.filter((color) => color.id !== id));
   };
   // actualizo el color
@@ -28,7 +30,7 @@ export default function App() {
   };
   return (
     <div>
-      <h1>Theme Creator</h1>
+      <h1 className="title ">Theme Creator</h1>
       <ColorForm onSubmit={addColor} />
       {colors.length === 0 ? (
         <p>There are no colors in the theme. Add some to get started.</p>
@@ -40,7 +42,8 @@ export default function App() {
             deleteButton={deleteButton}
             updateButton={updateButton}
           />
-          //ahora deletebotton es un prop para luego enviarla a color.jsx y ellos la reciban
+          //ahora deletebotton y updatebutton son prop para luego
+          // enviarla a componentes: color.jsx y ellos la reciban
         ))
       )}
     </div>

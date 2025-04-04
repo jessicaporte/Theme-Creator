@@ -3,61 +3,50 @@ import { nanoid } from "nanoid";
 import ColorInput from "./ColorInput";
 import { useEffect } from "react";
 
-export default function ColorForm({ initialColor, onSubmit }) {
+export default function ColorForm({ initialColors, onSubmit }) {
   const [hex, setHex] = useState("#000000");
   const [role, setRole] = useState("");
   const [contrastText, setContrastText] = useState("#FFFFFF");
 
-  // Si hay un color inicial (en el caso de edición), asi puedo actualizar el estado del formulario
+  // 4 al editar con isEditting en Colors.jsx, el effect detecta el cambio realizado en los colores iniciales y
+  // actualiza los valores del form, sin effect el form solo muestra valores por defecto
   useEffect(() => {
-    if (initialColor) {
-      setHex(initialColor.hex);
-      setRole(initialColor.role);
-      setContrastText(initialColor.contrastText);
+    if (initialColors) {
+      setHex(initialColors.hex);
+      setRole(initialColors.role);
+      setContrastText(initialColors.contrastText);
     }
-  }, [initialColor]);
+  }, [initialColors]);
 
   const handleSubmit = (event) => {
     event.preventDefault(); // Para evitar que el formulario se recargue
 
-    //es un nuevo objeto con los valores que ya tengo
-
+    //creo un nuevo objeto, si es colorinicial ya existe se mantiene el id, si es un color nuevo, se crea un id nuevo con nanoid
     const newColor = {
-      id: initialColor ? initialColor.id : nanoid(),
+      id: initialColors ? initialColors.id : nanoid(),
       hex,
       role,
       contrastText,
     };
 
-    onSubmit(newColor); // Pasamos el color actualizado
+    onSubmit(newColor); //  envío el newColor a App.jsx
 
-    // Resetear el formulario
+    // Resetreo el formulario asi lo dejo listo para un nuevo color
     setHex("#000000");
     setRole("");
     setContrastText("#FFFFFF");
   };
 
-  const handleCancel = () => {
-    // se restaura los valores iniciales al cancelar
-    if (initialColor) {
-      setHex(initialColor.hex);
-      setRole(initialColor.role);
-      setContrastText(initialColor.contrastText);
-    } // asi se llama para salir sin haber hecho nada
-    else {
-      setHex("#000000");
-      setRole("");
-      setContrastText("#FFFFFF");
-    }
-  };
-
   return (
-    <form onSubmit={handleSubmit}>
+    // define cómo se ve y cómo funciona el formulario
+    <form onSubmit={handleSubmit} className="color-form">
+      {" "}
+      {/*presiono Add o Update y se ejecuta handleSubmit*/}
       <ColorInput
         label="Hex"
         type="color"
         value={hex}
-        onChange={(e) => setHex(e.target.value)}
+        onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
       />
       <ColorInput
         label="Role"
@@ -72,11 +61,26 @@ export default function ColorForm({ initialColor, onSubmit }) {
         onChange={(e) => setContrastText(e.target.value)}
       />
       <button type="submit">
-        {initialColor ? "Update Color" : "Add Color"}
+        {initialColors ? "Update Color" : "Add Color"}{" "}
+        {/*cambio los valores y lo guardo con el botón "Update Color" o "Add Color".*/}
       </button>
-      <button type="button" onClick={handleCancel}>
+      {/*<button type="button" onClick={handleCancel}> 
         Cancel
-      </button>
+      </button> */}
     </form>
   );
 }
+
+/*const handleCancel = () => {
+    // se restaura los valores iniciales al cancelar
+    if (initialColors) {
+      setHex(initialColors.hex);
+      setRole(initialColors.role);
+      setContrastText(initialColors.contrastText);
+    } // asi se llama para salir sin haber hecho nada
+    else {
+      setHex("#000000");
+      setRole("");
+      setContrastText("#FFFFFF");
+    }
+  }; */
