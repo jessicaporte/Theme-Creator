@@ -2,7 +2,6 @@ import useLocalStorageState from "use-local-storage-state";
 import { initialColors } from "./components/colors";
 import ColorForm from "./components/ColorForm";
 import Color from "./components/Color";
-import CopyToClipboard from "./components/CopyToClipboard";
 
 export default function App() {
   const [colors, setColors] = useLocalStorageState("colors", {
