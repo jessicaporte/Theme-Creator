@@ -51,6 +51,12 @@ export default function ColorForm({ initialColors, onSubmit }) {
           onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
         />
         <ColorInput
+          label="Hex"
+          type="color"
+          value={hex}
+          onChange={(e) => setHex(e.target.value)} //actualizar el estado con el nuevo valor
+        />
+        <ColorInput
           label="Role"
           type="text"
           value={role}
@@ -59,6 +65,12 @@ export default function ColorForm({ initialColors, onSubmit }) {
         <ColorInput
           label="Contrast"
           type="text"
+          value={contrastText}
+          onChange={(e) => setContrastText(e.target.value)}
+        />
+        <ColorInput
+          label="Contrast"
+          type="color"
           value={contrastText}
           onChange={(e) => setContrastText(e.target.value)}
         />
